@@ -1,3 +1,8 @@
 #!/bin/sh
+set -x
 
-ls /release | xargs -i -- github-release $@ /release/{}
+echo "Uploading folder /release"
+echo "Running the following command for each file: github-release $@ <filename>"
+ls /release | xargs -i -t -- github-release $@ -n '{}' -f '/release/{}'
+
+set +x
